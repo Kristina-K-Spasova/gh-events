@@ -1,5 +1,11 @@
 name: Events Demo 1
-on: ...
+on: 
+  pull_request:
+    # specify the activity types of the pull_request event that should trigger the workflow
+    types:
+      - opened
+      - edited
+  workflow_dispatch:  # added like this even though we don't have anything to specify below 
 jobs:
   deploy:
     runs-on: ubuntu-latest
