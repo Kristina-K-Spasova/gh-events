@@ -6,6 +6,16 @@ on:
       - opened
       - edited
   workflow_dispatch:  # added like this even though we don't have anything to specify below 
+  push: 
+    # control when the workflow triggers based on an event filter 
+    # this one only runs if a push targets the main branch
+    branches:
+      - main 
+      - "dev-*" # covers pushes to example branches like "dev-new", "dev-something"
+      - "feat/**" # covers pushes to .. "feat/new", "feat/new/button"...
+    paths-ignore:  # this push event will trigger the workflow if one of the above branches are targeted 
+    # but we did not change a file in the workflows folder 
+      - ".github/workflows/*"
 jobs:
   deploy:
     runs-on: ubuntu-latest
